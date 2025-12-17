@@ -15,4 +15,17 @@ describe('BookCategoryService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  async onModuleInit() {
+    const count = await this.repo.count();
+    if (count === 0) {
+      console.log('Seeding Book Categories...');
+      await this.repo.save([
+        { name: 'Fiction', description: 'Stories and novels' },
+        { name: 'Technology', description: 'Computers and engineering' },
+        { name: 'History', description: 'Past events' }
+      ]);
+    }
+  }
+
 });
