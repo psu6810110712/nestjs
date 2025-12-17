@@ -5,7 +5,7 @@ import { UpdateBookCategoryDto } from './dto/update-book-category.dto';
 
 @Controller('book-category')
 export class BookCategoryController {
-  constructor(private readonly bookCategoryService: BookCategoryService) {}
+  constructor(private readonly bookCategoryService: BookCategoryService) { }
 
   @Post()
   create(@Body() createBookCategoryDto: CreateBookCategoryDto) {
@@ -19,16 +19,16 @@ export class BookCategoryController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.bookCategoryService.findOne(+id);
+    return this.bookCategoryService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBookCategoryDto: UpdateBookCategoryDto) {
-    return this.bookCategoryService.update(+id, updateBookCategoryDto);
+    return this.bookCategoryService.update(id, updateBookCategoryDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.bookCategoryService.remove(+id);
+    return this.bookCategoryService.remove(id);
   }
 }

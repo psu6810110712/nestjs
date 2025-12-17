@@ -32,15 +32,15 @@ export class BookCategoryService implements OnModuleInit {
     return this.repo.find();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.repo.findOneBy({ id });
   }
 
-  update(id: number, updateBookCategoryDto: UpdateBookCategoryDto) {
+  update(id: string, updateBookCategoryDto: UpdateBookCategoryDto) {
     return this.repo.update(id, updateBookCategoryDto);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.repo.delete(id);
   }
 }
