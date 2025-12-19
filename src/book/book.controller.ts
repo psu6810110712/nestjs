@@ -6,6 +6,7 @@ import { UpdateBookDto } from './dto/update-book.dto';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
+import { CurrentUser } from '../auth/current-user.decorator';
 
 @Controller('book')
 export class BookController {
@@ -46,9 +47,11 @@ export class BookController {
         return this.bookService.remove(id);
     }
 
-    // Public: ใครก็กด Like ได้
+    // ต้อง Login ก่อนถึงจะ Like ได้ (ทั้ง Admin/User)
+    @UseGuards(AuthGuard('jwt'))
     @Patch(':id/like')
-    likeBook(@Param('id') id: string) {
-        return this.bookService.incrementLikes(id);
+    async toggleLike(@Param('id') id: string, @CurrentUser() user: any) {
+        return this.bookService.toggleLike(id, user.userId);
     }
 }
+

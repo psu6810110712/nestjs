@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany } from 'typeorm';
+import { Book } from '../../book/entities/book.entity';
 
 export enum UserRole {
     USER = 'user',
@@ -28,4 +29,7 @@ export class User {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @ManyToMany(() => Book, (book) => book.likedBy)
+    likedBooks: Book[];
 }
